@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/BrandLogo";
 import { JourneyMap } from "@/components/JourneyMap";
 
 const LOOP = [
@@ -127,16 +128,21 @@ export default function LandingPage() {
 
       <section className="border-t border-white/5 bg-mbn-navy/20">
         <div className="mx-auto max-w-6xl px-6 py-12">
-          <p className="text-xs font-medium uppercase tracking-wider text-electric-bright">
-            Investor framing
-          </p>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-mbn-steel">
-            Become starts as a guided system scan and first mission. The larger platform expands
-            into a full body map, unlockable missions, adaptive coaching, physical tools, program
-            pathways, and human calibration protocols. The long-term product is not a workout
-            library — it is an interactive map of the body where users explore positions, clear fog,
-            unlock access, and learn to navigate by signal.
-          </p>
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+            <BrandLogo size="brand" framed />
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wider text-electric-bright">
+                Investor framing
+              </p>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-mbn-steel">
+                Become starts as a guided system scan and first mission. The larger platform expands
+                into a full body map, unlockable missions, adaptive coaching, physical tools, program
+                pathways, and human calibration protocols. The long-term product is not a workout
+                library — it is an interactive map of the body where users explore positions, clear fog,
+                unlock access, and learn to navigate by signal.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
