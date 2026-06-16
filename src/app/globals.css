@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-mbn-bg text-mbn-white antialiased;
+  }
+
+  ::selection {
+    @apply bg-electric-primary/30 text-mbn-white;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-2xl border border-white/5 bg-mbn-panel/90 backdrop-blur-sm;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-mbn-white via-electric-bright to-electric-primary bg-clip-text text-transparent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-electric-primary px-6 py-3 text-sm font-semibold text-mbn-bg transition-all hover:bg-electric-bright hover:shadow-glow-sm active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-white/10 bg-mbn-panel/50 px-6 py-3 text-sm font-medium text-mbn-steel transition-all hover:border-electric-primary/30 hover:bg-mbn-navy/50 hover:text-mbn-white active:scale-[0.98];
+  }
+
+  .option-card {
+    @apply w-full rounded-xl border border-white/5 bg-mbn-panel/40 p-4 text-left transition-all hover:border-electric-primary/20 hover:bg-mbn-panel/80;
+  }
+
+  .option-card-selected {
+    @apply border-electric-primary/50 bg-electric-glow/10 ring-1 ring-electric-primary/30;
+  }
+
+  .biomechanical-glow {
+    @apply pointer-events-none absolute rounded-full blur-3xl;
+    background-image: radial-gradient(ellipse at center, rgba(47, 128, 255, 0.15) 0%, transparent 70%);
+  }
+}
