@@ -45,4 +45,39 @@
     @apply pointer-events-none absolute rounded-full blur-3xl;
     background-image: radial-gradient(ellipse at center, rgba(47, 128, 255, 0.15) 0%, transparent 70%);
   }
+
+  .wilderness-panel {
+    @apply rounded-2xl border border-white/5 bg-gradient-to-br from-wilderness-forest/20 via-mbn-panel/80 to-mbn-bg/90 backdrop-blur-sm;
+  }
+
+  .signal-pathway {
+    @apply relative overflow-hidden;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 174, 239, 0.08) 50%,
+      transparent 100%
+    );
+  }
+
+  .member-glow {
+    box-shadow:
+      0 0 30px rgba(0, 174, 239, 0.08),
+      inset 0 1px 0 rgba(18, 216, 255, 0.1);
+  }
+
+  .threshold-enter {
+    animation: threshold-in 0.6s ease-out;
+  }
+
+  @keyframes threshold-in {
+    from {
+      opacity: 0.6;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

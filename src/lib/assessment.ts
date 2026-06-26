@@ -1,3 +1,4 @@
+import { computeAssessmentMetrics } from "./assessment-metrics";
 import type { AssessmentAnswers, CenterProfile, MissionContent, SignalMapRegion } from "./types";
 
 const MISSIONS: Record<string, MissionContent> = {
@@ -5,7 +6,7 @@ const MISSIONS: Record<string, MissionContent> = {
     id: "recalibration-scan",
     missionNumber: "01",
     title: "Recalibration Scan",
-    fullTitle: "Mission 01: Recalibration Scan",
+    fullTitle: "Mission #1: Recalibration Scan",
     pillar: "Breathe",
     pathway: "Return to Center",
     objective: "Identify the coordinates your body has stopped visiting.",
@@ -127,7 +128,7 @@ export function generateCenterProfile(answers: AssessmentAnswers): CenterProfile
   const signalMap = resolveSignalMap(answers);
   const positionCard = resolvePositionCard(answers);
 
-  return {
+  const profile: CenterProfile = {
     archetype: archetype.name,
     archetypeDescription: archetype.description,
     primaryDistortion,
@@ -147,6 +148,10 @@ export function generateCenterProfile(answers: AssessmentAnswers): CenterProfile
     fogClearedPercent: 8,
     backSphereAccessPercent: resolveBackSphereAccess(answers),
   };
+
+  profile.assessmentMetrics = computeAssessmentMetrics(profile, answers);
+
+  return profile;
 }
 
 export const generateFoundationProfile = generateCenterProfile;

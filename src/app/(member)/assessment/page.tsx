@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { PageShell } from "@/components/PageShell";
 import { ProgressBar } from "@/components/ProgressBar";
-import { FogIndicator } from "@/components/FogIndicator";
-import { DEFAULT_FOG } from "@/lib/pillars";
+import { FogLayer } from "@/components/atmosphere/FogLayer";
+import { UnknownMetric } from "@/components/member/FogReveal";
 import {
   ASSESSMENT_OPTIONS,
   ASSESSMENT_STEPS,
@@ -27,7 +27,6 @@ export default function AssessmentPage() {
   const options = ASSESSMENT_OPTIONS[currentStep];
   const selectedValue = answers[currentStep];
   const isLastStep = stepIndex === ASSESSMENT_STEPS.length - 1;
-  const scanProgress = Math.round(((stepIndex + 1) / ASSESSMENT_STEPS.length) * 100);
 
   function handleSelect(value: AssessmentAnswers[StepKey]) {
     setAnswers((prev) => ({ ...prev, [currentStep]: value }));
@@ -54,37 +53,38 @@ export default function AssessmentPage() {
 
   return (
     <PageShell
-      title="System Scan"
-      subtitle="You are entering the map. Each answer reveals more of your internal landscape, positional sphere, and distorted signal."
-      backHref="/"
+      title="Enter the Body"
+      subtitle="Observe. Do not perform. Each answer is a step through the fog — the map has not formed yet."
+      backHref="/enter"
+      backLabel="Mission #1"
       maxWidth="2xl"
     >
-      <FogIndicator
-        metrics={{
-          ...DEFAULT_FOG,
-          fogClearedPercent: Math.max(3, Math.round(scanProgress * 0.08)),
-          newSignalsDetected: stepIndex,
-        }}
-        compact
-      />
+      <div className="relative overflow-hidden rounded-2xl border border-white/5 p-4 sm:p-6">
+        <FogLayer density={0.7 - stepIndex * 0.05} animated />
+        <div className="relative grid gap-3 sm:grid-cols-3">
+          <UnknownMetric label="Center Score" />
+          <UnknownMetric label="Current Vector" />
+          <UnknownMetric label="Primary Mission" />
+        </div>
+      </div>
 
       <div className="mt-6">
         <ProgressBar
           current={stepIndex + 1}
           total={ASSESSMENT_STEPS.length}
-          label="Scan progress"
+          label="Walking the fog"
         />
       </div>
 
       <div className="mt-10">
         <p className="text-xs font-medium uppercase tracking-wider text-electric-bright">
-          Scan point {stepIndex + 1} of {ASSESSMENT_STEPS.length}
+          Observation {stepIndex + 1} of {ASSESSMENT_STEPS.length}
         </p>
         <h2 className="mt-2 font-display text-2xl text-mbn-white">{STEP_LABELS[currentStep]}</h2>
         {STEP_HINTS[currentStep] && (
           <p className="mt-2 text-sm text-electric-primary/80">{STEP_HINTS[currentStep]}</p>
         )}
-        <p className="mt-2 text-sm text-mbn-steel-dim">Select the signal that fits best</p>
+        <p className="mt-2 text-sm text-mbn-steel-dim">Trust what you notice</p>
 
         <div className="mt-6 space-y-3">
           {options.map((option) => {
@@ -133,7 +133,7 @@ export default function AssessmentPage() {
             disabled={!selectedValue}
             className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {isLastStep ? "Generate Center Profile" : "Continue Scan"}
+            {isLastStep ? "Reveal the map" : "Continue"}
           </button>
         </div>
       </div>

@@ -89,17 +89,17 @@ export default function ReflectionPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="mt-6 font-display text-3xl text-mbn-white">Map updated</h1>
+          <h1 className="mt-6 font-display text-3xl text-mbn-white">The world opens</h1>
           <p className="mx-auto mt-3 max-w-md text-mbn-steel">
-            Fog cleared: 15%. New signal integrated. Mission Control will review your map update and
-            recommend the next mission.
+            Territory integrated. The universe is now yours to walk — new paths, new maps, new
+            discoveries.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Link href="/coach" className="btn-primary">
-              View Mission Control
+            <Link href="/universe" className="btn-primary">
+              Enter your universe
             </Link>
-            <Link href="/profile" className="btn-secondary">
-              Back to Center Profile
+            <Link href="/journal" className="btn-secondary">
+              Read journal
             </Link>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function ReflectionPage() {
     { id: "directionToExplore", label: "What direction do you feel called to explore next?", value: directionToExplore, set: setDirectionToExplore, required: false, placeholder: "The next coordinate on the map..." },
     { id: "stayedCourseOrRedirected", label: "Did you stay the course or redirect the ship?", value: stayedCourseOrRedirected, set: setStayedCourseOrRedirected, required: false, placeholder: "How you navigated by signal..." },
     { id: "intuitionNote", label: "What did your intuition tell you?", value: intuitionNote, set: setIntuitionNote, required: false, placeholder: "Inner navigation, gut signal..." },
-    { id: "coachShouldKnow", label: "What should your coach know before the next mission?", value: coachShouldKnow, set: setCoachShouldKnow, required: false, placeholder: "Context for Mission Control..." },
+    { id: "coachShouldKnow", label: "Anything else the territory revealed?", value: coachShouldKnow, set: setCoachShouldKnow, required: false, placeholder: "What became visible..." },
   ];
 
   return (
