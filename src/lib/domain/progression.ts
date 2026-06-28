@@ -110,7 +110,7 @@ function resolveNextStep(
   switch (stage) {
     case "visitor":
       return {
-        label: "Mission #1",
+        label: "Mission 0",
         href: routePath("enter"),
         description: "Everything is fog. The map has not yet formed.",
         cta: "Enter the Body",
@@ -119,8 +119,8 @@ function resolveNextStep(
       return {
         label: "Continue the scan",
         href: routePath("assessment"),
-        description: "Signal is emerging. Keep walking.",
-        cta: "Continue",
+        description: "Signal is emerging. Keep observing.",
+        cta: "Continue scan",
       };
     case "profile_revealed":
       return {
@@ -176,7 +176,7 @@ export function getUnlockLabel(id: UnlockId): string {
     workout: "Workout Mode",
     territory: "Territory Map",
     universe: "Universe",
-    paths: "Skill Paths",
+    paths: "Skills",
     journal: "Journal",
     progress: "Progress",
   };
@@ -199,6 +199,10 @@ export function getUnlockHref(id: UnlockId): string {
   return routePath(map[id]);
 }
 
-export const MEMBER_NAV_ORDER: UnlockId[] = UNLOCK_ORDER.filter(
-  (id) => id !== "enter" && id !== "mission"
-);
+export const MEMBER_NAV_ORDER: UnlockId[] = [
+  "body_map",
+  "territory",
+  "universe",
+  "paths",
+  "journal",
+];

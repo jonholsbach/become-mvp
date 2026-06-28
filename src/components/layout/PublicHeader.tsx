@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
 
 const PUBLIC_LINKS = [
@@ -10,6 +13,12 @@ const PUBLIC_LINKS = [
 ];
 
 export function PublicHeader() {
+  const pathname = usePathname();
+
+  if (pathname === "/enter") {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-mbn-bg/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">

@@ -1,6 +1,7 @@
 "use client";
 
 import { POST_MISSION_FOG, POST_SCAN_FOG, type FogMetrics } from "@/lib/pillars";
+import type { MissionZeroAnswers } from "@/lib/domain/models/mission-zero";
 import type { AssessmentAnswers, CenterProfile, MapUpdateSubmission } from "@/lib/types";
 import { localStorageAdapter } from "./storage/localStorageAdapter";
 import type { StorageAdapter } from "./storage/types";
@@ -22,6 +23,14 @@ export function saveAssessment(answers: AssessmentAnswers): void {
 
 export function loadAssessment(): AssessmentAnswers | null {
   return adapter.getAssessment();
+}
+
+export function saveMissionZeroScan(answers: MissionZeroAnswers): void {
+  adapter.setMissionZeroScan(answers);
+}
+
+export function loadMissionZeroScan(): MissionZeroAnswers | null {
+  return adapter.getMissionZeroScan();
 }
 
 export function saveProfile(profile: CenterProfile): void {

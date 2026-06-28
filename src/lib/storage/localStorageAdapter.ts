@@ -1,7 +1,9 @@
 "use client";
 
 import { computeAssessmentMetrics } from "@/lib/assessment-metrics";
-import type {
+import type { MissionZeroAnswers } from "@/lib/domain/models/mission-zero";
+import { isMissionZeroAnswers } from "@/lib/mission-zero/scoring";
+import {
   AssessmentAnswers,
   CenterProfile,
   MapUpdateSubmission,
@@ -109,11 +111,28 @@ export function createLocalStorageAdapter(keys: StorageKeys = DEFAULT_STORAGE_KE
     }
   };
 
+  const getMissionZeroScan = (): MissionZeroAnswers | null => {
+    if (typeof window === "undefined") return null;
+    const raw = localStorage.getItem(keys.missionZero);
+    if (!raw) return null;
+    try {
+      const parsed = JSON.parse(raw);
+      return isMissionZeroAnswers(parsed) ? parsed : null;
+    } catch {
+      return null;
+    }
+  };
+
   return {
     getAssessment,
     setAssessment(answers) {
       if (typeof window === "undefined") return;
       localStorage.setItem(keys.assessment, JSON.stringify(answers));
+    },
+    getMissionZeroScan,
+    setMissionZeroScan(answers) {
+      if (typeof window === "undefined") return;
+      localStorage.setItem(keys.missionZero, JSON.stringify(answers));
     },
     getProfile() {
       if (typeof window === "undefined") return null;
@@ -169,6 +188,7 @@ export function createLocalStorageAdapter(keys: StorageKeys = DEFAULT_STORAGE_KE
       localStorage.removeItem("foundation-reflection");
       localStorage.removeItem("foundation-module-progress");
       localStorage.removeItem("become-reflection");
+      localStorage.removeItem("become-mission-zero");
     },
   };
 }

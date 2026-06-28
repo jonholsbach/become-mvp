@@ -1,8 +1,11 @@
 import type { AssessmentAnswers, CenterProfile, MapUpdateSubmission } from "@/lib/types";
+import type { MissionZeroAnswers } from "@/lib/domain/models/mission-zero";
 
 export interface StorageAdapter {
   getAssessment(): AssessmentAnswers | null;
   setAssessment(answers: AssessmentAnswers): void;
+  getMissionZeroScan(): MissionZeroAnswers | null;
+  setMissionZeroScan(answers: MissionZeroAnswers): void;
   getProfile(): CenterProfile | null;
   setProfile(profile: CenterProfile): void;
   getMapUpdate(): MapUpdateSubmission | null;
@@ -14,6 +17,7 @@ export interface StorageAdapter {
 
 export interface StorageKeys {
   assessment: string;
+  missionZero: string;
   profile: string;
   mapUpdate: string;
   stepProgress: string;
@@ -21,6 +25,7 @@ export interface StorageKeys {
 
 export const DEFAULT_STORAGE_KEYS: StorageKeys = {
   assessment: "become-assessment",
+  missionZero: "become-mission-zero",
   profile: "become-profile",
   mapUpdate: "become-map-update",
   stepProgress: "become-step-progress",

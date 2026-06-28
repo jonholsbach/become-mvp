@@ -6,6 +6,7 @@ import { resolveProgression, type ProgressionState } from "@/lib/domain/progress
 import {
   loadAssessment,
   loadMapUpdate,
+  loadMissionZeroScan,
   loadProfile,
   loadStepChecklist,
 } from "@/lib/storage";
@@ -26,8 +27,10 @@ function readSession(): Omit<MemberSessionState, "refresh"> {
   const assessment = loadAssessment();
   const mapUpdate = loadMapUpdate();
   const checklist = loadStepChecklist();
+  const missionZero = loadMissionZeroScan();
   const session = getMemberSession(profile, mapUpdate, checklist);
-  const progression = resolveProgression(profile, mapUpdate, checklist);
+  const scanning = !profile && !!missionZero;
+  const progression = resolveProgression(profile, mapUpdate, checklist, scanning);
   return { profile, assessment, mapUpdate, checklist, session, progression };
 }
 

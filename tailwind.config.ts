@@ -61,6 +61,31 @@ const config: Config = {
           "0%, 100%": { transform: "translateX(0)" },
           "50%": { transform: "translateX(-2%)" },
         },
+        "fog-swirl": {
+          "0%": { transform: "rotate(0deg) scale(1)" },
+          "50%": { transform: "rotate(180deg) scale(1.03)" },
+          "100%": { transform: "rotate(360deg) scale(1)" },
+        },
+        "fog-bank-1": {
+          "0%, 100%": { transform: "translateX(-4%) translateY(0)" },
+          "50%": { transform: "translateX(4%) translateY(1.5%)" },
+        },
+        "fog-bank-2": {
+          "0%, 100%": { transform: "translateX(3%) translateY(0)" },
+          "50%": { transform: "translateX(-5%) translateY(-1%)" },
+        },
+        "fog-bank-3": {
+          "0%, 100%": { transform: "translateX(-2%) translateY(0.5%)" },
+          "50%": { transform: "translateX(3%) translateY(-0.5%)" },
+        },
+        "fog-breathe": {
+          "0%, 100%": { opacity: "0.32" },
+          "50%": { opacity: "0.48" },
+        },
+        "energy-pulse": {
+          "0%, 100%": { opacity: "0.45", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.05)" },
+        },
         "signal-flow": {
           "0%": { strokeDashoffset: "100" },
           "100%": { strokeDashoffset: "0" },
@@ -70,6 +95,12 @@ const config: Config = {
         "fog-drift": "fog-drift 20s ease-in-out infinite",
         "fog-roll": "fog-roll 25s ease-in-out infinite",
         "fog-roll-slow": "fog-roll-slow 35s ease-in-out infinite",
+        "fog-swirl": "fog-swirl 40s linear infinite",
+        "fog-bank-1": "fog-bank-1 32s ease-in-out infinite",
+        "fog-bank-2": "fog-bank-2 38s ease-in-out infinite",
+        "fog-bank-3": "fog-bank-3 44s ease-in-out infinite",
+        "fog-breathe": "fog-breathe 10s ease-in-out infinite",
+        "energy-pulse": "energy-pulse 5s ease-in-out infinite",
         "signal-flow": "signal-flow 8s linear infinite",
         "signal-flow-delayed": "signal-flow 12s linear infinite 2s",
       },
