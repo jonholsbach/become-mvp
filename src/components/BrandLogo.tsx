@@ -1,9 +1,11 @@
-const LOGO_SRC = "/images/mbn-logo.png";
+import { NAV_LOGO } from "@/lib/brand-assets";
+
+const LOGO_SRC = NAV_LOGO.path;
 
 type BrandLogoSize = "header" | "brand";
 
 const sizeClasses: Record<BrandLogoSize, string> = {
-  header: "h-8 w-auto sm:h-9",
+  header: "h-9 w-auto sm:h-10",
   brand: "h-12 w-auto sm:h-14",
 };
 
@@ -37,7 +39,7 @@ export function BrandLogo({
 
   return (
     <div
-      className={`flex shrink-0 items-center rounded-lg border border-electric-primary/25 bg-mbn-panel/90 px-2 py-1 shadow-[0_0_18px_rgba(0,174,239,0.1)] ${
+      className={`flex shrink-0 items-center rounded-lg border border-electric-primary/25 bg-transparent px-2.5 py-1.5 ${
         size === "brand" ? "px-3 py-1.5" : ""
       }`}
     >

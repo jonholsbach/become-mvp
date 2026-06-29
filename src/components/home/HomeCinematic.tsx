@@ -2,8 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import {
+  getArmHeroDimensions,
+  getArmHeroMaxCssWidth,
+  getArmHeroSrc,
+} from "@/lib/brand-assets";
 
-const ARM_SRC = "/images/mbn-arm-generator.png";
+const heroSrc = getArmHeroSrc();
+const heroDimensions = getArmHeroDimensions();
+const heroMaxCssWidth = getArmHeroMaxCssWidth();
 
 export type CinematicPhase =
   | "darkness"
@@ -64,7 +71,7 @@ export function HomeCinematic() {
 
   const idx = phaseIndex(phase);
   const fogActive = idx >= phaseIndex("fogReveal");
-  const armActive = idx >= phaseIndex("armEmerges");
+  const artifactRevealed = idx >= phaseIndex("armEmerges");
   const signalActive = idx >= phaseIndex("signalPulse");
   const brandActive = idx >= phaseIndex("brandReveal");
   const becomeActive = idx >= phaseIndex("becomeReveal");
@@ -73,12 +80,12 @@ export function HomeCinematic() {
     <div className="home-cinematic bg-black" data-phase={phase}>
       {/* ── Viewport 1: Intro cinematic ───────────────────────────── */}
       <section
-        className="hc-intro relative min-h-[100svh] overflow-hidden bg-black"
+        className={`hc-intro relative min-h-[100svh] overflow-hidden bg-black ${artifactRevealed ? "hc-atmosphere-revealed" : ""}`}
         aria-label="Mechanical by Nature presents"
       >
         <div className="hc-void absolute inset-0" aria-hidden />
 
-        {/* Fog layers — always subtly moving once revealed */}
+        {/* Atmospheric fog — movement and light live here */}
         <div
           className={`hc-fog-layer hc-fog-back ${fogActive ? "hc-fog-visible" : ""} ${!reducedMotion ? "hc-fog-drift" : ""}`}
           aria-hidden
@@ -92,50 +99,41 @@ export function HomeCinematic() {
           aria-hidden
         />
 
-        {/* Clearing opens as fog reveals */}
-        <div
-          className={`hc-fog-clearing pointer-events-none absolute inset-0 ${fogActive ? "hc-clearing-open" : ""}`}
-          aria-hidden
-        />
+        {signalActive && !reducedMotion && (
+          <div className="hc-fog-signal pointer-events-none absolute inset-0" aria-hidden />
+        )}
 
-        <div className="relative z-10 flex min-h-[100svh] flex-col items-center px-6 pt-[6vh] sm:pt-[8vh]">
-          {/* Arm artifact */}
+        <div className="relative z-10 flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center px-4 sm:px-6">
+          {/* Arm — master asset only; atmosphere/shadow as separate layers */}
           <div
-            className={`hc-arm-wrap relative mx-auto w-[min(48vw,540px)] ${armActive ? "hc-arm-visible" : ""}`}
+            className="hc-artifact-stage relative mx-auto w-full max-w-[min(96vw,840px)]"
+            style={{ "--hc-artifact-max": `${heroMaxCssWidth}px` } as React.CSSProperties}
           >
-            <div
-              className={`hc-signal-core pointer-events-none absolute left-1/2 top-[36%] z-0 -translate-x-1/2 -translate-y-1/2 ${signalActive ? "hc-signal-active" : ""}`}
-              aria-hidden
+            <div className="hc-artifact-rim pointer-events-none absolute left-1/2 top-[42%] z-0 -translate-x-1/2 -translate-y-1/2" aria-hidden />
+            <div className="hc-artifact-ground pointer-events-none absolute left-1/2 z-[5] -translate-x-1/2" aria-hidden />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={heroSrc}
+              alt=""
+              width={heroDimensions.width}
+              height={heroDimensions.height}
+              decoding="async"
+              fetchPriority="high"
+              className="hc-artifact relative z-10 mx-auto"
             />
-            <div
-              className={`hc-signal-pulse pointer-events-none absolute left-1/2 top-[36%] z-0 -translate-x-1/2 -translate-y-1/2 ${signalActive ? "hc-signal-pulsing" : ""}`}
-              aria-hidden
-            />
-            <div className="hc-arm-mask relative z-10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={ARM_SRC}
-                alt=""
-                decoding="async"
-                fetchPriority="high"
-                className={`hc-arm-image mx-auto h-[min(58vh,580px)] w-auto max-w-none object-contain sm:h-[min(62vh,620px)] ${armActive ? "hc-arm-emerged" : ""}`}
-              />
-              {signalActive && !reducedMotion && (
-                <div className="hc-light-sweep pointer-events-none absolute inset-0" aria-hidden />
-              )}
-            </div>
-            <div className="hc-arm-mist pointer-events-none absolute -bottom-6 left-1/2 z-20 h-28 w-[140%] -translate-x-1/2" aria-hidden />
           </div>
 
-          {/* Brand typography */}
+          {/* Brand typography — live HTML only; reflection via CSS ::after */}
           <div
-            className={`hc-brand mt-16 flex flex-col items-center text-center sm:mt-24 ${brandActive ? "hc-brand-visible" : ""}`}
+            className={`hc-brand mt-6 w-full max-w-4xl sm:mt-8 ${brandActive ? "hc-brand-visible" : ""}`}
           >
-            <p className="hc-brand-title font-medium uppercase tracking-[0.42em] text-mbn-white sm:tracking-[0.52em]">
-              Mechanical by Nature
-            </p>
-            <div className="hc-brand-rule mt-7 h-px w-20 bg-gradient-to-r from-transparent via-electric-primary/70 to-transparent" />
-            <p className="mt-7 text-[10px] font-medium uppercase tracking-[0.6em] text-electric-bright sm:text-xs">
+            <div className="hc-brand-title-wrap relative flex flex-col items-center">
+              <p className="hc-brand-title font-brand text-[clamp(1.05rem,3.1vw,2.25rem)] font-bold uppercase leading-none tracking-[0.24em] sm:tracking-[0.28em]">
+                Mechanical by Nature
+              </p>
+            </div>
+            <div className="hc-brand-rule mx-auto mt-7 h-px w-32 sm:w-44" aria-hidden />
+            <p className="hc-brand-presents mt-7 font-sans text-[11px] font-semibold uppercase tracking-[0.62em] text-electric-bright sm:text-xs sm:tracking-[0.68em]">
               Presents
             </p>
           </div>

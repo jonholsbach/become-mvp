@@ -563,8 +563,9 @@
 
   .hc-void {
     background:
-      radial-gradient(ellipse 100% 70% at 50% 28%, rgba(8, 14, 28, 0.35) 0%, transparent 52%),
-      radial-gradient(ellipse 70% 50% at 25% 72%, rgba(4, 12, 30, 0.22) 0%, transparent 48%),
+      radial-gradient(ellipse 90% 65% at 50% 32%, rgba(0, 80, 140, 0.18) 0%, transparent 55%),
+      radial-gradient(ellipse 100% 70% at 50% 28%, rgba(8, 14, 28, 0.45) 0%, transparent 52%),
+      radial-gradient(ellipse 70% 50% at 25% 72%, rgba(4, 12, 30, 0.28) 0%, transparent 48%),
       #000;
   }
 
@@ -583,6 +584,7 @@
 
   .hc-fog-back {
     background:
+      radial-gradient(ellipse 130% 95% at 48% 38%, rgba(0, 120, 180, 0.12) 0%, transparent 58%),
       radial-gradient(ellipse 130% 95% at 48% 42%, rgba(61, 82, 102, 0.38) 0%, transparent 58%),
       radial-gradient(ellipse 75% 55% at 18% 65%, rgba(26, 40, 56, 0.45) 0%, transparent 52%);
   }
@@ -592,11 +594,12 @@
       linear-gradient(
         180deg,
         transparent 0%,
-        rgba(139, 164, 184, 0.1) 38%,
+        rgba(18, 216, 255, 0.04) 30%,
+        rgba(139, 164, 184, 0.12) 42%,
         rgba(139, 164, 184, 0.16) 58%,
         transparent 88%
       ),
-      radial-gradient(ellipse 85% 65% at 52% 44%, rgba(139, 164, 184, 0.14) 0%, transparent 62%);
+      radial-gradient(ellipse 85% 65% at 52% 40%, rgba(139, 164, 184, 0.16) 0%, transparent 62%);
   }
 
   .hc-fog-front {
@@ -655,187 +658,209 @@
     }
   }
 
-  .hc-fog-clearing {
-    opacity: 0;
-    background: radial-gradient(
-      ellipse 55% 48% at 50% 36%,
-      rgba(5, 9, 14, 0) 0%,
-      rgba(5, 9, 14, 0.92) 100%
-    );
-    transition: opacity 3.2s ease-out;
-  }
-
-  .hc-clearing-open {
-    opacity: 1;
-    background: radial-gradient(
-      ellipse 40% 36% at 50% 34%,
-      rgba(5, 9, 14, 0) 0%,
-      rgba(5, 9, 14, 0.04) 42%,
-      rgba(5, 9, 14, 0.65) 100%
-    );
-  }
-
-  .hc-arm-wrap {
-    opacity: 0;
-    transition: opacity 1.8s ease-out;
-  }
-
-  .hc-arm-visible {
-    opacity: 1;
-  }
-
-  .hc-arm-mask {
-    mask-image: radial-gradient(
-      ellipse 72% 78% at 50% 44%,
-      #000 28%,
-      #000 52%,
-      transparent 82%
-    );
-    -webkit-mask-image: radial-gradient(
-      ellipse 72% 78% at 50% 44%,
-      #000 28%,
-      #000 52%,
-      transparent 82%
-    );
-  }
-
-  .hc-arm-image {
-    opacity: 0;
-    filter: brightness(0.22) saturate(0.55) contrast(0.88);
-    mix-blend-mode: lighten;
-  }
-
-  .hc-arm-emerged {
-    animation: hc-arm-emerge 2.6s ease-out forwards;
-  }
-
-  @keyframes hc-arm-emerge {
-    0% {
-      opacity: 0;
-      filter: brightness(0.18) saturate(0.45) blur(5px);
-      transform: scale(0.965) translateY(1.2%);
-    }
-    45% {
-      opacity: 0.55;
-      filter: brightness(0.5) saturate(0.72) blur(2px);
-    }
-    100% {
-      opacity: 1;
-      filter: brightness(0.92) saturate(1.04) contrast(1.02) blur(0);
-      transform: scale(1) translateY(0);
-    }
-  }
-
-  .hc-arm-mist {
-    background: radial-gradient(
-      ellipse 55% 100% at 50% 0%,
-      transparent 0%,
-      rgba(5, 9, 14, 0.35) 38%,
-      rgba(5, 9, 14, 0.92) 100%
-    );
-    animation: hc-arm-mist-drift 20s ease-in-out infinite;
-  }
-
-  @keyframes hc-arm-mist-drift {
-    0%,
-    100% {
-      opacity: 0.65;
-    }
-    50% {
-      opacity: 0.95;
-    }
-  }
-
-  .hc-signal-core {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(18, 216, 255, 0.5) 0%,
-      rgba(0, 174, 239, 0.18) 38%,
-      transparent 68%
-    );
-    opacity: 0;
-    transition: opacity 1.4s ease-out;
-  }
-
-  .hc-signal-active {
-    opacity: 1;
-    animation: hc-signal-core-glow 4.5s ease-in-out infinite;
-  }
-
-  @keyframes hc-signal-core-glow {
-    0%,
-    100% {
-      opacity: 0.55;
-      filter: blur(0);
-    }
-    50% {
-      opacity: 1;
-      filter: blur(1px);
-    }
-  }
-
-  .hc-signal-pulse {
-    width: 128px;
-    height: 128px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 174, 239, 0.18);
-    opacity: 0;
-    box-shadow: 0 0 36px rgba(0, 174, 239, 0.06);
-  }
-
-  .hc-signal-pulsing {
-    opacity: 1;
-    animation: hc-signal-pulse 4.2s ease-in-out infinite;
-  }
-
-  @keyframes hc-signal-pulse {
-    0%,
-    100% {
-      opacity: 0.3;
-      box-shadow: 0 0 28px rgba(0, 174, 239, 0.05);
-    }
-    50% {
-      opacity: 0.72;
-      box-shadow:
-        0 0 48px rgba(18, 216, 255, 0.14),
-        0 0 80px rgba(0, 174, 239, 0.08);
-    }
-  }
-
-  .hc-light-sweep {
-    background: linear-gradient(
-      105deg,
-      transparent 0%,
-      transparent 38%,
-      rgba(18, 216, 255, 0.05) 46%,
-      rgba(0, 174, 239, 0.11) 50%,
-      rgba(18, 216, 255, 0.05) 54%,
-      transparent 62%,
-      transparent 100%
-    );
-    background-size: 260% 100%;
+  .hc-fog-signal {
+    background:
+      radial-gradient(
+        ellipse 34% 28% at 50% 36%,
+        rgba(18, 216, 255, 0.14) 0%,
+        rgba(0, 174, 239, 0.06) 42%,
+        transparent 72%
+      ),
+      linear-gradient(
+        105deg,
+        transparent 0%,
+        rgba(18, 216, 255, 0.04) 46%,
+        rgba(0, 174, 239, 0.08) 50%,
+        rgba(18, 216, 255, 0.04) 54%,
+        transparent 100%
+      );
+    background-size:
+      100% 100%,
+      240% 100%;
     mix-blend-mode: screen;
-    animation: hc-light-sweep 7s ease-in-out infinite;
+    opacity: 0;
+    animation: hc-fog-signal-reveal 1.8s ease-out forwards, hc-fog-light-sweep 8s ease-in-out 1.8s infinite;
   }
 
-  @keyframes hc-light-sweep {
+  @keyframes hc-fog-signal-reveal {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes hc-fog-light-sweep {
     0%,
     100% {
-      background-position: 180% center;
-      opacity: 0.35;
+      background-position:
+        0 0,
+        180% center;
     }
     50% {
-      background-position: -80% center;
-      opacity: 0.85;
+      background-position:
+        0 0,
+        -70% center;
     }
+  }
+
+  .hc-artifact-stage {
+    line-height: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  .hc-artifact-rim {
+    width: min(68vw, 500px);
+    height: min(40vh, 360px);
+    background:
+      radial-gradient(
+        ellipse 70% 65% at 50% 45%,
+        rgba(18, 216, 255, 0.1) 0%,
+        rgba(0, 174, 239, 0.05) 42%,
+        transparent 72%
+      );
+    filter: blur(24px);
+    opacity: 0.75;
+    transition: opacity 2.4s ease-out;
+  }
+
+  .hc-atmosphere-revealed .hc-artifact-rim {
+    opacity: 1;
+  }
+
+  /* Ground shadow — same plane as title reflection; never on the image */
+  .hc-artifact-ground {
+    bottom: 0;
+    width: min(80%, 520px);
+    height: 64px;
+    background: radial-gradient(
+      ellipse 100% 100% at 50% 50%,
+      rgba(201, 214, 230, 0.22) 0%,
+      rgba(183, 203, 224, 0.11) 40%,
+      rgba(120, 150, 180, 0.04) 65%,
+      transparent 82%
+    );
+    filter: blur(80px);
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(24px);
+  }
+
+  .hc-atmosphere-revealed .hc-artifact-ground {
+    opacity: 0.65;
+    transition: opacity 2.4s ease-out;
+  }
+
+  /* Sized via --hc-artifact-max from brand-assets (native ÷ 2 × display scale) */
+  .hc-artifact {
+    display: block;
+    width: min(92vw, var(--hc-artifact-max, 589px));
+    height: auto;
+    max-width: var(--hc-artifact-max, 589px);
+  }
+
+  @media (min-width: 640px) {
+    .hc-artifact {
+      width: min(78vw, var(--hc-artifact-max, 589px));
+    }
+  }
+
+  .hc-atmosphere-revealed .hc-fog-mid {
+    opacity: 0.5;
+  }
+
+  .hc-atmosphere-revealed .hc-fog-front {
+    opacity: 0.28;
   }
 
   .hc-brand {
     opacity: 0;
     transform: translateY(14px);
+    text-align: center;
+  }
+
+  .hc-brand-title-wrap {
+    position: relative;
+  }
+
+  .hc-brand-title {
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.24em;
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eef4fa 8%,
+      #c5d4e3 24%,
+      #8fa3b8 50%,
+      #5a6d82 74%,
+      #3d4f63 90%,
+      #243040 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter:
+      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.6))
+      drop-shadow(0 2px 0 rgba(255, 255, 255, 0.08))
+      drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.65))
+      drop-shadow(0 3px 1px rgba(0, 0, 0, 0.8))
+      drop-shadow(0 7px 5px rgba(0, 0, 0, 0.88))
+      drop-shadow(0 16px 36px rgba(0, 0, 0, 0.58))
+      drop-shadow(0 0 22px rgba(201, 214, 230, 0.12))
+      drop-shadow(0 0 44px rgba(0, 174, 239, 0.08));
+  }
+
+  /* Single visible title — reflection is decorative only */
+  .hc-brand-title-wrap::after {
+    content: "Mechanical by Nature";
+    display: block;
+    margin-top: -0.02em;
+    font-family: var(--font-brand), Rajdhani, system-ui, sans-serif;
+    font-size: clamp(1.05rem, 3.1vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    transform: scaleY(-1) translateY(-0.08em);
+    background: linear-gradient(
+      180deg,
+      rgba(201, 214, 230, 0.4) 0%,
+      rgba(170, 190, 210, 0.18) 26%,
+      rgba(120, 150, 175, 0.06) 52%,
+      transparent 68%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.38;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.48) 0%, rgba(0, 0, 0, 0.14) 20%, transparent 52%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.48) 0%, rgba(0, 0, 0, 0.14) 20%, transparent 52%);
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (min-width: 640px) {
+    .hc-brand-title-wrap::after {
+      letter-spacing: 0.28em;
+    }
+  }
+
+  .hc-brand-rule {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(18, 216, 255, 0.15) 20%,
+      rgba(18, 216, 255, 0.85) 50%,
+      rgba(18, 216, 255, 0.15) 80%,
+      transparent 100%
+    );
+    box-shadow: 0 0 12px rgba(18, 216, 255, 0.45);
+  }
+
+  .hc-brand-presents {
+    color: #12d8ff;
+    text-shadow:
+      0 0 20px rgba(18, 216, 255, 0.55),
+      0 0 40px rgba(0, 174, 239, 0.25);
   }
 
   .hc-brand-visible {
@@ -886,23 +911,13 @@
     .home-cinematic .hc-fog-drift,
     .home-cinematic .hc-fog-roll,
     .home-cinematic .hc-fog-breathe,
-    .home-cinematic .hc-arm-emerged,
-    .home-cinematic .hc-signal-active,
-    .home-cinematic .hc-signal-pulsing,
-    .home-cinematic .hc-light-sweep,
-    .home-cinematic .hc-scroll-cue,
-    .home-cinematic .hc-arm-mist {
+    .home-cinematic .hc-fog-signal,
+    .home-cinematic .hc-scroll-cue {
       animation: none !important;
     }
 
     .home-cinematic .hc-fog-visible {
       opacity: 0.55;
-    }
-
-    .home-cinematic .hc-arm-image {
-      opacity: 1;
-      filter: none;
-      transform: none;
     }
 
     .home-cinematic .hc-brand-visible {

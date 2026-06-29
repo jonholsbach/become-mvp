@@ -1,6 +1,7 @@
-const ARM_SRC = "/images/mbn-arm-generator.png";
-
 import type { SpherePhase } from "@/components/atmosphere/GeneratingSphere";
+import { getArmHeroSrc } from "@/lib/brand-assets";
+
+const ARM_SRC = getArmHeroSrc();
 
 interface MechanicalArmVisualProps {
   phase?: SpherePhase;

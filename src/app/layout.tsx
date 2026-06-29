@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Instrument_Serif } from "next/font/google";
+import { DM_Sans, Instrument_Serif, Orbitron } from "next/font/google";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -15,6 +15,13 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  variable: "--font-brand",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Become — Enter the Body",
   description:
@@ -27,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${instrumentSerif.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${instrumentSerif.variable} ${orbitron.variable}`}>
       <body className="min-h-screen bg-mbn-bg font-sans">
         <div className="pointer-events-none fixed inset-0 bg-grain opacity-50" aria-hidden />
         {children}
