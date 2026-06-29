@@ -704,7 +704,6 @@
 
   .hc-artifact-stage {
     line-height: 0;
-    padding-bottom: 0.5rem;
   }
 
   .hc-artifact-rim {
@@ -864,7 +863,7 @@
   }
 
   .hc-brand-visible {
-    animation: hc-brand-reveal 2.2s ease-out forwards;
+    animation: hc-brand-reveal 1.4s ease-out forwards;
   }
 
   @keyframes hc-brand-reveal {

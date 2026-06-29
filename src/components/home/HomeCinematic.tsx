@@ -34,8 +34,8 @@ const TIMELINE_MS: Record<CinematicPhase, number> = {
   darkness: 0,
   fogReveal: 600,
   armEmerges: 2200,
-  signalPulse: 3800,
-  brandReveal: 5500,
+  signalPulse: 2600,
+  brandReveal: 3000,
   becomeReveal: 8000,
 };
 
@@ -104,9 +104,10 @@ export function HomeCinematic() {
         )}
 
         <div className="relative z-10 flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center px-4 sm:px-6">
+          <div className="flex w-full max-w-[min(96vw,840px)] flex-col items-center">
           {/* Arm — master asset only; atmosphere/shadow as separate layers */}
           <div
-            className="hc-artifact-stage relative mx-auto w-full max-w-[min(96vw,840px)]"
+            className="hc-artifact-stage relative mx-auto w-full"
             style={{ "--hc-artifact-max": `${heroMaxCssWidth}px` } as React.CSSProperties}
           >
             <div className="hc-artifact-rim pointer-events-none absolute left-1/2 top-[42%] z-0 -translate-x-1/2 -translate-y-1/2" aria-hidden />
@@ -125,7 +126,7 @@ export function HomeCinematic() {
 
           {/* Brand typography — live HTML only; reflection via CSS ::after */}
           <div
-            className={`hc-brand mt-6 w-full max-w-4xl sm:mt-8 ${brandActive ? "hc-brand-visible" : ""}`}
+            className={`hc-brand -mt-10 w-full max-w-4xl sm:-mt-12 ${brandActive ? "hc-brand-visible" : ""}`}
           >
             <div className="hc-brand-title-wrap relative flex flex-col items-center">
               <p className="hc-brand-title font-brand text-[clamp(1.05rem,3.1vw,2.25rem)] font-bold uppercase leading-none tracking-[0.24em] sm:tracking-[0.28em]">
@@ -136,6 +137,7 @@ export function HomeCinematic() {
             <p className="hc-brand-presents mt-7 font-sans text-[11px] font-semibold uppercase tracking-[0.62em] text-electric-bright sm:text-xs sm:tracking-[0.68em]">
               Presents
             </p>
+          </div>
           </div>
         </div>
 
