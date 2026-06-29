@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   getArmHeroDimensions,
@@ -80,27 +79,27 @@ export function HomeCinematic() {
     <div className="home-cinematic bg-black" data-phase={phase}>
       {/* ── Viewport 1: Intro cinematic ───────────────────────────── */}
       <section
-        className={`hc-intro relative min-h-[100svh] overflow-hidden bg-black ${artifactRevealed ? "hc-atmosphere-revealed" : ""}`}
+        className={`hc-intro relative min-h-[100svh] overflow-hidden bg-black ${artifactRevealed ? "hc-atmosphere-revealed" : ""} ${signalActive ? "hc-signal-live" : ""}`}
         aria-label="Mechanical by Nature presents"
       >
-        <div className="hc-void absolute inset-0" aria-hidden />
+        <div className="hc-void absolute inset-0 z-0" aria-hidden />
 
-        {/* Atmospheric fog — movement and light live here */}
+        {/* Fog — back layers pass behind logo/text */}
         <div
-          className={`hc-fog-layer hc-fog-back ${fogActive ? "hc-fog-visible" : ""} ${!reducedMotion ? "hc-fog-drift" : ""}`}
+          className={`hc-fog-layer hc-fog-back hc-fog-z-back ${fogActive ? "hc-fog-visible" : ""} ${!reducedMotion ? "hc-fog-drift" : ""}`}
           aria-hidden
         />
         <div
-          className={`hc-fog-layer hc-fog-mid ${fogActive ? "hc-fog-visible" : ""} ${!reducedMotion ? "hc-fog-roll" : ""}`}
+          className={`hc-fog-layer hc-fog-mid hc-fog-z-back ${fogActive ? "hc-fog-visible" : ""} ${!reducedMotion ? "hc-fog-roll" : ""}`}
           aria-hidden
         />
         <div
-          className={`hc-fog-layer hc-fog-front ${fogActive ? "hc-fog-visible" : ""} ${!reducedMotion ? "hc-fog-breathe" : ""}`}
+          className={`hc-fog-layer hc-fog-roll-bank ${fogActive ? "hc-fog-visible" : ""} ${!reducedMotion ? "hc-fog-bank-drift" : ""}`}
           aria-hidden
         />
 
         {signalActive && !reducedMotion && (
-          <div className="hc-fog-signal pointer-events-none absolute inset-0" aria-hidden />
+          <div className="hc-fog-signal hc-fog-z-mid pointer-events-none absolute inset-0" aria-hidden />
         )}
 
         <div className="relative z-10 flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center px-4 sm:px-6">
@@ -133,7 +132,7 @@ export function HomeCinematic() {
                 Mechanical by Nature
               </p>
             </div>
-            <div className="hc-brand-rule mx-auto mt-7 h-px w-32 sm:w-44" aria-hidden />
+            <div className="hc-brand-rule mx-auto mt-7 w-32 sm:w-44" aria-hidden />
             <p className="hc-brand-presents mt-7 font-sans text-[11px] font-semibold uppercase tracking-[0.62em] text-electric-bright sm:text-xs sm:tracking-[0.68em]">
               Presents
             </p>
@@ -141,12 +140,23 @@ export function HomeCinematic() {
           </div>
         </div>
 
+        {/* Fog — front veil passes over logo/text */}
         <div
-          className={`pointer-events-none absolute bottom-8 left-1/2 z-20 -translate-x-1/2 text-electric-primary/30 transition-opacity duration-[2s] ${becomeActive ? "opacity-100" : "opacity-0"}`}
+          className={`hc-fog-layer hc-fog-front hc-fog-veil-front ${fogActive ? "hc-fog-visible" : ""} ${!reducedMotion ? "hc-fog-breathe" : ""}`}
+          aria-hidden
+        />
+
+        <div
+          className={`hc-scroll-invite pointer-events-none absolute bottom-[16%] left-1/2 z-20 -translate-x-1/2 transition-opacity duration-[2.4s] ${brandActive ? (becomeActive ? "opacity-100" : "opacity-55") : "opacity-0"}`}
           aria-hidden
         >
-          <svg className="h-5 w-5 hc-scroll-cue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          <div className={`hc-scroll-path ${!reducedMotion ? "hc-scroll-path-active" : ""}`}>
+            <span className="hc-scroll-mark" />
+            <span className="hc-scroll-mark" />
+            <span className="hc-scroll-mark" />
+          </div>
+          <svg className="hc-scroll-cue h-7 w-7 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.25} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
       </section>
@@ -162,21 +172,16 @@ export function HomeCinematic() {
 
         <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-6 text-center">
           <div className="hc-become-content">
-            <div className="mb-8 h-px w-24 bg-gradient-to-r from-transparent via-electric-primary/45 to-transparent" />
-            <h1 className="font-display text-6xl tracking-tight text-mbn-white sm:text-7xl lg:text-8xl">
-              BECOME
-            </h1>
-            <p className="mt-8 max-w-lg font-display text-2xl leading-snug text-mbn-white sm:text-3xl">
-              Enter the Body.
-              <br />
-              <span className="gradient-text">Push Back the Fog.</span>
+            <div className="hc-become-rule mx-auto mb-10" aria-hidden />
+            <p className="font-display text-xl leading-snug text-mbn-steel sm:text-2xl">
+              The fog does not move until you do.
             </p>
-            <Link
-              href="/enter"
-              className="btn-primary mt-10 inline-flex px-10 py-4 text-base shadow-glow-sm"
-            >
-              Enter the Body
-            </Link>
+            <h1 className="hc-become-title font-brand mt-8 text-[clamp(3.5rem,12vw,6.5rem)] font-bold uppercase leading-none tracking-[0.18em] sm:tracking-[0.22em]">
+              Become
+            </h1>
+            <p className="mx-auto mt-8 max-w-md font-display text-lg leading-relaxed text-mbn-steel sm:text-xl">
+              Become begins where autopilot ends.
+            </p>
           </div>
         </div>
       </section>

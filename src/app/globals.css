@@ -577,6 +577,19 @@
     will-change: transform, opacity;
   }
 
+  .hc-fog-z-back {
+    z-index: 2;
+  }
+
+  .hc-fog-z-mid {
+    z-index: 6;
+  }
+
+  .hc-fog-veil-front {
+    z-index: 14;
+    mix-blend-mode: screen;
+  }
+
   .hc-fog-visible {
     opacity: 1;
     transition: opacity 2.4s ease-out;
@@ -605,12 +618,51 @@
   .hc-fog-front {
     background: linear-gradient(
       180deg,
-      rgba(5, 9, 14, 0.35) 0%,
-      transparent 22%,
-      rgba(139, 164, 184, 0.07) 48%,
-      rgba(61, 82, 102, 0.11) 72%,
-      rgba(5, 9, 14, 0.45) 100%
+      rgba(5, 9, 14, 0.28) 0%,
+      transparent 18%,
+      rgba(139, 164, 184, 0.09) 44%,
+      rgba(61, 82, 102, 0.14) 68%,
+      rgba(5, 9, 14, 0.38) 100%
     );
+  }
+
+  /* Rolling fog bank — lighthouse sweep interaction */
+  .hc-fog-roll-bank {
+    z-index: 3;
+    background:
+      linear-gradient(
+        100deg,
+        transparent 0%,
+        rgba(18, 216, 255, 0.04) 38%,
+        rgba(139, 164, 184, 0.14) 50%,
+        rgba(18, 216, 255, 0.05) 62%,
+        transparent 100%
+      ),
+      radial-gradient(ellipse 120% 80% at 50% 55%, rgba(61, 82, 102, 0.2) 0%, transparent 65%);
+    background-size:
+      220% 100%,
+      100% 100%;
+    opacity: 0.55;
+  }
+
+  .hc-fog-bank-drift {
+    animation: hc-fog-bank-drift 18s ease-in-out infinite;
+  }
+
+  @keyframes hc-fog-bank-drift {
+    0%,
+    100% {
+      background-position:
+        120% center,
+        0 0;
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      background-position:
+        -40% center,
+        0 0;
+      transform: translate3d(-2%, 1%, 0);
+    }
   }
 
   .hc-fog-drift {
@@ -725,6 +777,36 @@
     opacity: 1;
   }
 
+  .hc-signal-live .hc-artifact-rim {
+    animation: hc-rim-light-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes hc-rim-light-pulse {
+    0%,
+    100% {
+      opacity: 0.75;
+      filter: blur(24px);
+    }
+    50% {
+      opacity: 1;
+      filter: blur(28px);
+    }
+  }
+
+  .hc-signal-live .hc-artifact-ground {
+    animation: hc-ground-light-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes hc-ground-light-pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.72;
+    }
+  }
+
   /* Ground shadow — same plane as title reflection; never on the image */
   .hc-artifact-ground {
     bottom: 0;
@@ -807,6 +889,36 @@
       drop-shadow(0 0 44px rgba(0, 174, 239, 0.08));
   }
 
+  .hc-signal-live .hc-brand-visible .hc-brand-title {
+    animation: hc-title-light-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes hc-title-light-pulse {
+    0%,
+    100% {
+      filter:
+        drop-shadow(0 1px 0 rgba(255, 255, 255, 0.6))
+        drop-shadow(0 2px 0 rgba(255, 255, 255, 0.08))
+        drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.65))
+        drop-shadow(0 3px 1px rgba(0, 0, 0, 0.8))
+        drop-shadow(0 7px 5px rgba(0, 0, 0, 0.88))
+        drop-shadow(0 16px 36px rgba(0, 0, 0, 0.58))
+        drop-shadow(0 0 22px rgba(201, 214, 230, 0.12))
+        drop-shadow(0 0 44px rgba(0, 174, 239, 0.08));
+    }
+    50% {
+      filter:
+        drop-shadow(0 1px 0 rgba(255, 255, 255, 0.72))
+        drop-shadow(0 2px 0 rgba(255, 255, 255, 0.14))
+        drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.65))
+        drop-shadow(0 3px 1px rgba(0, 0, 0, 0.8))
+        drop-shadow(0 7px 5px rgba(0, 0, 0, 0.88))
+        drop-shadow(0 16px 36px rgba(0, 0, 0, 0.58))
+        drop-shadow(0 0 28px rgba(201, 214, 230, 0.2))
+        drop-shadow(0 0 56px rgba(0, 174, 239, 0.18));
+    }
+  }
+
   /* Single visible title — reflection is decorative only */
   .hc-brand-title-wrap::after {
     content: "Mechanical by Nature";
@@ -844,15 +956,18 @@
   }
 
   .hc-brand-rule {
+    height: 2px;
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(18, 216, 255, 0.15) 20%,
-      rgba(18, 216, 255, 0.85) 50%,
-      rgba(18, 216, 255, 0.15) 80%,
+      rgba(18, 216, 255, 0.25) 15%,
+      rgba(18, 216, 255, 0.95) 50%,
+      rgba(18, 216, 255, 0.25) 85%,
       transparent 100%
     );
-    box-shadow: 0 0 12px rgba(18, 216, 255, 0.45);
+    box-shadow:
+      0 0 16px rgba(18, 216, 255, 0.55),
+      0 0 32px rgba(0, 174, 239, 0.2);
   }
 
   .hc-brand-presents {
@@ -877,6 +992,54 @@
     }
   }
 
+  .hc-scroll-invite {
+    color: rgba(18, 216, 255, 0.55);
+    filter: drop-shadow(0 0 12px rgba(18, 216, 255, 0.35));
+  }
+
+  .hc-scroll-path {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .hc-scroll-mark {
+    display: block;
+    width: 3px;
+    height: 3px;
+    border-radius: 9999px;
+    background: rgba(18, 216, 255, 0.45);
+    box-shadow: 0 0 6px rgba(18, 216, 255, 0.5);
+    opacity: 0.25;
+  }
+
+  .hc-scroll-path-active .hc-scroll-mark:nth-child(1) {
+    animation: hc-scroll-mark-pulse 2.4s ease-in-out infinite;
+  }
+
+  .hc-scroll-path-active .hc-scroll-mark:nth-child(2) {
+    animation: hc-scroll-mark-pulse 2.4s ease-in-out 0.35s infinite;
+  }
+
+  .hc-scroll-path-active .hc-scroll-mark:nth-child(3) {
+    animation: hc-scroll-mark-pulse 2.4s ease-in-out 0.7s infinite;
+  }
+
+  @keyframes hc-scroll-mark-pulse {
+    0%,
+    100% {
+      opacity: 0.2;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.15);
+      box-shadow: 0 0 10px rgba(18, 216, 255, 0.75);
+    }
+  }
+
   .hc-scroll-cue {
     animation: hc-scroll-bounce 2.6s ease-in-out infinite;
   }
@@ -885,12 +1048,47 @@
     0%,
     100% {
       transform: translateY(0);
-      opacity: 0.35;
+      opacity: 0.45;
     }
     50% {
-      transform: translateY(7px);
-      opacity: 0.75;
+      transform: translateY(8px);
+      opacity: 0.95;
     }
+  }
+
+  .hc-become-rule {
+    width: 6rem;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(18, 216, 255, 0.35) 20%,
+      rgba(18, 216, 255, 0.9) 50%,
+      rgba(18, 216, 255, 0.35) 80%,
+      transparent 100%
+    );
+    box-shadow:
+      0 0 18px rgba(18, 216, 255, 0.45),
+      0 0 36px rgba(0, 174, 239, 0.15);
+  }
+
+  .hc-become-title {
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #d8e4f0 18%,
+      #9bb0c4 48%,
+      #5a7088 78%,
+      #2a3848 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter:
+      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.5))
+      drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.55))
+      drop-shadow(0 8px 24px rgba(0, 0, 0, 0.65))
+      drop-shadow(0 0 32px rgba(0, 174, 239, 0.12));
   }
 
   .hc-become-content {
@@ -910,8 +1108,13 @@
     .home-cinematic .hc-fog-drift,
     .home-cinematic .hc-fog-roll,
     .home-cinematic .hc-fog-breathe,
+    .home-cinematic .hc-fog-bank-drift,
     .home-cinematic .hc-fog-signal,
-    .home-cinematic .hc-scroll-cue {
+    .home-cinematic .hc-scroll-cue,
+    .home-cinematic .hc-scroll-mark,
+    .home-cinematic .hc-artifact-rim,
+    .home-cinematic .hc-artifact-ground,
+    .home-cinematic .hc-brand-title {
       animation: none !important;
     }
 
